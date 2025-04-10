@@ -1,0 +1,61 @@
+﻿@page
+@model FinalProject.Pages.EventReports.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventReport[0].ManagerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventReport[0].OwnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventReport[0].EventDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventReport[0].ReportDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventReport[0].EventType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.EventReport) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ReportId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ReportId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ReportId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

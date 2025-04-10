@@ -1,0 +1,73 @@
+﻿@page
+@model FinalProject.Pages.Apartments.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].BuildingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].ApartmentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].Bedrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apartment[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Apartment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApartmentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bedrooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ApartmentId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ApartmentId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ApartmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

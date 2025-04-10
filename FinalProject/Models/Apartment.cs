@@ -1,0 +1,44 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FinalProject.Models
+{
+
+
+    public enum ApartmentStatus
+    {
+        Available,
+        Occupied,
+        Maintenance
+    }
+
+    public class Apartment
+    {
+        [Key]
+        public int ApartmentId { get; set; }
+
+        [Required(ErrorMessage = "Building ID is required.")]
+        public int BuildingId { get; set; } // Foreign key to Building
+
+        [StringLength(20)]
+        [Display(Name = "Apartment Number")]
+        [Required(ErrorMessage = "Apartment Number is required.")]
+        public required string ApartmentNumber { get; set; }
+
+        [Required(ErrorMessage = "Floor number is required.")]
+        public int Floor { get; set; }
+
+        [Required(ErrorMessage = "Number of Bedrooms is required.")]
+        public int Bedrooms { get; set; }
+
+        [Required(ErrorMessage = "Area is required.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Area must be a positive value.")]
+        public decimal Area { get; set; }
+
+        [Display(Name = "Status")]
+        [Required(ErrorMessage = "Status is required.")]
+        public required ApartmentStatus Status { get; set; } // 'available', 'occupied', 'maintenance'
+
+        [Display(Name = "Description")]
+        public string? Description { get; set; }
+    }
+}
