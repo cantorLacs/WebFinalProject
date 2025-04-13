@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Appoiments
+namespace FinalProject.Pages.Tenants
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace FinalProject.Pages.Appoiments
         }
 
         [BindProperty]
-        public Appointment Appointment { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +35,7 @@ namespace FinalProject.Pages.Appoiments
                 return Page();
             }
 
-            _context.Appointment.Add(Appointment);
+            _context.User.Add(User);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Appoiments
+namespace FinalProject.Pages.Tenants
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace FinalProject.Pages.Appoiments
             _context = context;
         }
 
-        public Appointment Appointment { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace FinalProject.Pages.Appoiments
                 return NotFound();
             }
 
-            var appointment = await _context.Appointment.FirstOrDefaultAsync(m => m.AppointmentId == id);
-            if (appointment == null)
+            var user = await _context.User.FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
             else
             {
-                Appointment = appointment;
+                User = user;
             }
             return Page();
         }

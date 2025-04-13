@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Users
+namespace FinalProject.Pages.Auth
 {
     public class IndexModel : PageModel
     {

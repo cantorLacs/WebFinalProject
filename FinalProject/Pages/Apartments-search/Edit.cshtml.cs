@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Appoiments
+namespace FinalProject.Pages.Apartments_search
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace FinalProject.Pages.Appoiments
         }
 
         [BindProperty]
-        public Appointment Appointment { get; set; } = default!;
+        public Apartment Apartment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,12 @@ namespace FinalProject.Pages.Appoiments
                 return NotFound();
             }
 
-            var appointment =  await _context.Appointment.FirstOrDefaultAsync(m => m.AppointmentId == id);
-            if (appointment == null)
+            var apartment =  await _context.Apartment.FirstOrDefaultAsync(m => m.ApartmentId == id);
+            if (apartment == null)
             {
                 return NotFound();
             }
-            Appointment = appointment;
+            Apartment = apartment;
             return Page();
         }
 
@@ -48,7 +48,7 @@ namespace FinalProject.Pages.Appoiments
                 return Page();
             }
 
-            _context.Attach(Appointment).State = EntityState.Modified;
+            _context.Attach(Apartment).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace FinalProject.Pages.Appoiments
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppointmentExists(Appointment.AppointmentId))
+                if (!ApartmentExists(Apartment.ApartmentId))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace FinalProject.Pages.Appoiments
             return RedirectToPage("./Index");
         }
 
-        private bool AppointmentExists(int id)
+        private bool ApartmentExists(int id)
         {
-            return _context.Appointment.Any(e => e.AppointmentId == id);
+            return _context.Apartment.Any(e => e.ApartmentId == id);
         }
     }
 }

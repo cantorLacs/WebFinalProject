@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Appoiments
+namespace FinalProject.Pages.Apartments_search
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace FinalProject.Pages.Appoiments
             _context = context;
         }
 
-        public IList<Appointment> Appointment { get;set; } = default!;
+        public IList<Apartment> Apartment { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Appointment = await _context.Appointment.ToListAsync();
+            Apartment = await _context.Apartment.ToListAsync();
         }
     }
 }

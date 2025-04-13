@@ -18,14 +18,90 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                    @if (User.IsInRole("Owner"))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Managers">Managers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Tenants">Tenants</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Messages">Messages</a>
+                            </li>
+
+                        </ul>
+                    }
+                    else if (User.IsInRole("Manager"))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href ="/Buildings">Buildings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href ="/Apartments">Apartments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href ="/Appointments">Appointments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href ="/Messages">Messages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/EventReports">Reports</a>
+                            </li>
+
+                        </ul>
+                    }
+                    else if (User.IsInRole("Tenant"))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark">Search by:</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Buildings-search">Buildings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Apartments-search">Apartments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Messages">Messages</a>
+                            </li>
+                        </ul>
+
+                    }
+                    else {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark">Search by:</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Buildings-search">Buildings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href = "/Apartments-search">Apartments</a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span>👋 Welcome, @User.Identity.Name</span>
+                        <form method="post" asp-page="/Auth/Logout" style="display:inline;">
+                            <button type="submit" class="btn btn-link">LogOut</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-page="/Auth/Login" style="display:inline;">
+                            <button type="submit" class="btn btn-link">Login</button>
+                        </form>
+                        <form asp-page="/Auth/Register" style="display:inline;">
+                            <button type="submit" class="btn btn-link">Register</button>
+                        </form>
+                    }
                 </div>
             </div>
         </nav>

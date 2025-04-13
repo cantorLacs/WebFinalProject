@@ -1,0 +1,17 @@
+﻿@page
+@model FinalProject.Pages.Auth.RegisterModel
+
+<h2>Register</h2>
+<form method="post">
+    <input asp-for="User.FirstName" placeholder="FirstName" />
+    <input asp-for="User.LastName" placeholder="LastName" />
+    <input asp-for="User.Email" placeholder="Email" />
+    <input asp-for="User.Phone" placeholder="Phone" />
+    <input asp-for="User.Password" type="password" placeholder="password" />
+    <select asp-for="User.Role">
+        <option value="Tenant">Tenant</option>
+        <option value="Manager">Manager</option>
+        <option value="Owner">Owner</option>
+    </select>
+    <button type="submit">Register</button>
+</form>

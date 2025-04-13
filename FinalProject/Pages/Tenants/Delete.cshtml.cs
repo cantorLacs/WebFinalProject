@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.Appoiments
+namespace FinalProject.Pages.Tenants
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace FinalProject.Pages.Appoiments
         }
 
         [BindProperty]
-        public Appointment Appointment { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace FinalProject.Pages.Appoiments
                 return NotFound();
             }
 
-            var appointment = await _context.Appointment.FirstOrDefaultAsync(m => m.AppointmentId == id);
+            var user = await _context.User.FirstOrDefaultAsync(m => m.UserId == id);
 
-            if (appointment == null)
+            if (user == null)
             {
                 return NotFound();
             }
             else
             {
-                Appointment = appointment;
+                User = user;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace FinalProject.Pages.Appoiments
                 return NotFound();
             }
 
-            var appointment = await _context.Appointment.FindAsync(id);
-            if (appointment != null)
+            var user = await _context.User.FindAsync(id);
+            if (user != null)
             {
-                Appointment = appointment;
-                _context.Appointment.Remove(Appointment);
+                User = user;
+                _context.User.Remove(User);
                 await _context.SaveChangesAsync();
             }
 
