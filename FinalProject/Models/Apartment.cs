@@ -17,7 +17,7 @@ namespace FinalProject.Models
         public int ApartmentId { get; set; }
 
         [Required(ErrorMessage = "Building ID is required.")]
-        public int BuildingId { get; set; } // Foreign key to Building
+        public int Buildingid { get; set; } 
 
         [StringLength(20)]
         [Display(Name = "Apartment Number")]
@@ -33,6 +33,10 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Area is required.")]
         [Range(0, double.MaxValue, ErrorMessage = "Area must be a positive value.")]
         public decimal Area { get; set; }
+
+        [Required(ErrorMessage = "Rental Price is required.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Rental Price must be a positive value.")]
+        public int RentalPrice { get; set; }
 
         [Display(Name = "Status")]
         [Required(ErrorMessage = "Status is required.")]

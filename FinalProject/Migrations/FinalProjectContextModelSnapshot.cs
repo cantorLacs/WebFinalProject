@@ -50,10 +50,15 @@ namespace FinalProject.Migrations
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
+                    b.Property<int>("RentalPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("ApartmentId");
+
+                    b.HasIndex("BuildingId");
 
                     b.ToTable("Apartment");
                 });
@@ -225,6 +230,17 @@ namespace FinalProject.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("FinalProject.Models.Apartment", b =>
+                {
+                    b.HasOne("FinalProject.Models.Building", "Building")
+                        .WithMany()
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Building");
                 });
 #pragma warning restore 612, 618
         }

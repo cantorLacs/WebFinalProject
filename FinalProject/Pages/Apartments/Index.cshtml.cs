@@ -14,16 +14,20 @@ namespace FinalProject.Pages.Apartments
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
 
+
         public IndexModel(FinalProject.Data.FinalProjectContext context)
         {
             _context = context;
         }
 
         public IList<Apartment> Apartment { get;set; } = default!;
+        public IList<Building> Buildings { get; set; } = new List<Building>();
 
         public async Task OnGetAsync()
         {
+            Buildings = await _context.Building.ToListAsync();
             Apartment = await _context.Apartment.ToListAsync();
+
         }
     }
 }

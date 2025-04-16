@@ -16,9 +16,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Apartment.BuildingId" class="control-label"></label>
-                <input asp-for="Apartment.BuildingId" class="form-control" />
-                <span asp-validation-for="Apartment.BuildingId" class="text-danger"></span>
+                <label asp-for="SelectedBuildingId" class="control-label">Building</label>
+                <select asp-for="SelectedBuildingId" class="form-control" asp-items="Model.Buildings"></select>
+                <span asp-validation-for="SelectedBuildingId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -46,8 +46,14 @@
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
+                <label asp-for="Apartment.RentalPrice" class="control-label"></label>
+                <input asp-for="Apartment.RentalPrice" class="form-control" />
+                <span asp-validation-for="Apartment.RentalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
                 <label asp-for="Apartment.Status" class="control-label"></label>
-                <select asp-for="Apartment.Status" class="form-control"></select>
+                <select asp-for="Apartment.Status" class="form-control" asp-items="Model.StatusOptions"></select>
                 <span asp-validation-for="Apartment.Status" class="text-danger"></span>
             </div>
             <div class="form-group">

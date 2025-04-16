@@ -17,9 +17,9 @@
             <input type="hidden" asp-for="Apartment.ApartmentId" />
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Apartment.BuildingId" class="control-label"></label>
-                <input asp-for="Apartment.BuildingId" class="form-control" />
-                <span asp-validation-for="Apartment.BuildingId" class="text-danger"></span>
+                <label asp-for="Apartment.Buildingid" class="control-label"></label>
+                <input asp-for="Apartment.Buildingid" class="form-control" />
+                <span asp-validation-for="Apartment.Buildingid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -44,6 +44,12 @@
                 <label asp-for="Apartment.Area" class="control-label"></label>
                 <input asp-for="Apartment.Area" class="form-control" />
                 <span asp-validation-for="Apartment.Area" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Apartment.RentalPrice" class="control-label"></label>
+                <input asp-for="Apartment.RentalPrice" class="form-control" />
+                <span asp-validation-for="Apartment.RentalPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
