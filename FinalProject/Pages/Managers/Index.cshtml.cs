@@ -23,10 +23,16 @@ namespace FinalProject.Pages.Users
 
         public IList<User> User { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string? search)
         {
-            User = await _context.User.Where(u => u.Role == UserRole.Manager)
-            .ToListAsync();
+            var query = _context.User.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
+            }
+
+            User = await query.Where(u => u.Role == UserRole.Manager).ToListAsync();
         }
     }
 }

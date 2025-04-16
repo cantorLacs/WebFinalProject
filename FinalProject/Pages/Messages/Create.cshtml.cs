@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FinalProject.Data;
 using FinalProject.Models;
+using System.Security.Claims;
 
 namespace FinalProject.Pages.Messages
 {
@@ -30,6 +31,11 @@ namespace FinalProject.Pages.Messages
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
+            Message.SenderId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Message.SendDate = DateTime.Now;
+            Message.IsRead = false;
+
             if (!ModelState.IsValid)
             {
                 return Page();

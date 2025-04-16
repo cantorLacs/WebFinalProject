@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinalProject.Pages.Apartments_search
 {
@@ -23,7 +24,9 @@ namespace FinalProject.Pages.Apartments_search
 
         public async Task OnGetAsync()
         {
-            Apartment = await _context.Apartment.ToListAsync();
+            var query = _context.Apartment.AsQueryable();
+
+            Apartment = await query.Where(a => a.Status != ApartmentStatus.Occupied).ToListAsync();
         }
     }
 }

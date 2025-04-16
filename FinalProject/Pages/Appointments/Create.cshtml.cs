@@ -35,6 +35,9 @@ namespace FinalProject.Pages.Appointments
                 return Page();
             }
 
+            AppointmentStatus status = AppointmentStatus.Pending;
+
+
             _context.Appointment.Add(Appointment);
             await _context.SaveChangesAsync();
 

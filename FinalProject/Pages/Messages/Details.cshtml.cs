@@ -28,7 +28,10 @@ namespace FinalProject.Pages.Messages
                 return NotFound();
             }
 
+            
+
             var message = await _context.Message.FirstOrDefaultAsync(m => m.MessageId == id);
+
             if (message == null)
             {
                 return NotFound();
@@ -36,6 +39,18 @@ namespace FinalProject.Pages.Messages
             else
             {
                 Message = message;
+            }
+            Message.IsRead = true;
+            _context.Attach(Message).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+              
             }
             return Page();
         }

@@ -16,12 +16,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Message.SenderId" class="control-label"></label>
-                <input asp-for="Message.SenderId" class="form-control" />
-                <span asp-validation-for="Message.SenderId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
                 <label asp-for="Message.ReceiverId" class="control-label"></label>
                 <input asp-for="Message.ReceiverId" class="form-control" />
                 <span asp-validation-for="Message.ReceiverId" class="text-danger"></span>
@@ -36,16 +30,6 @@
                 <label asp-for="Message.Content" class="control-label"></label>
                 <input asp-for="Message.Content" class="form-control" />
                 <span asp-validation-for="Message.Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Message.SendDate" class="control-label"></label>
-                <input asp-for="Message.SendDate" class="form-control" />
-                <span asp-validation-for="Message.SendDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Message.IsRead" /> @Html.DisplayNameFor(model => model.Message.IsRead)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

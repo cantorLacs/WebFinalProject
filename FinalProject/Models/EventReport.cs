@@ -26,6 +26,6 @@ namespace FinalProject.Models
         public DateTime ReportDate { get; set; }
 
         [Display(Name = "Event Type")]
-        public EventType? EventType { get; set; } // Optional: classification or type of event
+        public EventType? EventType { get; set; }
     }
 }

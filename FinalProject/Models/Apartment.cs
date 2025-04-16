@@ -8,7 +8,7 @@ namespace FinalProject.Models
     {
         Available,
         Occupied,
-        Maintenance
+        Appointment,
     }
 
     public class Apartment
@@ -36,7 +36,7 @@ namespace FinalProject.Models
 
         [Display(Name = "Status")]
         [Required(ErrorMessage = "Status is required.")]
-        public required ApartmentStatus Status { get; set; } // 'available', 'occupied', 'maintenance'
+        public required ApartmentStatus Status { get; set; } 
 
         [Display(Name = "Description")]
         public string? Description { get; set; }

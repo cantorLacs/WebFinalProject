@@ -30,7 +30,7 @@ namespace FinalProject.Pages.Appointments
                 return NotFound();
             }
 
-            var appointment =  await _context.Appointment.FirstOrDefaultAsync(m => m.AppointmentId == id);
+            var appointment = await _context.Appointment.FirstOrDefaultAsync(m => m.AppointmentId == id);
             if (appointment == null)
             {
                 return NotFound();
@@ -48,30 +48,26 @@ namespace FinalProject.Pages.Appointments
                 return Page();
             }
 
-            _context.Attach(Appointment).State = EntityState.Modified;
+            var appointmentToUpdate = await _context.Appointment.FindAsync(Appointment.AppointmentId);
+            if (appointmentToUpdate == null)
+            {
+                return NotFound();
+            }
 
-            try
+            if (User.IsInRole("Manager"))
             {
-                await _context.SaveChangesAsync();
+                appointmentToUpdate.Status = Appointment.Status;
             }
-            catch (DbUpdateConcurrencyException)
+
+            if (User.IsInRole("Tenant"))
             {
-                if (!AppointmentExists(Appointment.AppointmentId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                appointmentToUpdate.Date = Appointment.Date;
+                appointmentToUpdate.Notes = Appointment.Notes;
             }
+
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-        }
-
-        private bool AppointmentExists(int id)
-        {
-            return _context.Appointment.Any(e => e.AppointmentId == id);
         }
     }
 }

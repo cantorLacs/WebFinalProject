@@ -24,16 +24,7 @@
                 @Html.DisplayNameFor(model => model.Apartment[0].Floor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Bedrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Area)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Apartment[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Description)
             </th>
             <th></th>
         </tr>
@@ -51,16 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Floor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bedrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ApartmentId">Edit</a> |

@@ -36,7 +36,7 @@ namespace FinalProject.Models
 
         [Display(Name = "Role")]
         [Required(ErrorMessage = "Role is required.")]
-        public required UserRole Role { get; set; } // 'owner', 'manager', 'tenant'
+        public required UserRole Role { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Phone Number")]

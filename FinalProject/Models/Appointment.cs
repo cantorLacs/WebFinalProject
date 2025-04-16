@@ -20,7 +20,7 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Manager ID is required.")]
         public int ManagerId { get; set; } // Foreign key to User
 
-        public int? ApartmentId { get; set; } // Optional foreign key to Apartment
+        public int? ApartmentId { get; set; }
 
         [Required(ErrorMessage = "Date is required.")]
         public DateTime Date { get; set; }

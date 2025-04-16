@@ -1,67 +1,64 @@
 ﻿@page
 @model FinalProject.Pages.Messages.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
-}
-
-<h1>Index</h1>
+<h1>Messages</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<h2>Received Messages</h2>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].SenderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].ReceiverId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].SendDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message[0].IsRead)
-            </th>
-            <th></th>
+            <th>Recipient</th>
+            <th>Subject</th>
+            <th>Send Date</th>
+            <th>Read</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Message) {
+        @foreach (var message in Model.ReceivedMessages)
+        {
+            <tr>
+                <td>@message.SenderId</td>
+                <td>@message.Subject</td>
+                <td>@message.SendDate.ToString("g")</td>
+                <td>
+                    @(message.IsRead ? "Read" : "New")
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@message.MessageId">Open</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Sent Messages</h2>
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SenderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiverId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SendDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsRead)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.MessageId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.MessageId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.MessageId">Delete</a>
-            </td>
+            <th>Recipient</th>
+            <th>Subject</th>
+            <th>Send Date</th>
+            <th>Read</th>
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var message in Model.SentMessages)
+        {
+            <tr>
+                <td>@message.ReceiverId</td>
+                <td>@message.Subject</td>
+                <td>@message.SendDate.ToString("g")</td>
+                <td>
+                    @(message.IsRead ? "Read" : "New")
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@message.MessageId">Open</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

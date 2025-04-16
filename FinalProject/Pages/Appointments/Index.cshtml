@@ -8,15 +8,15 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (User.IsInRole("Manager"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointment[0].TenantId)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Appointment[0].ManagerId)
             </th>
@@ -36,31 +36,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Appointment) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenantId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManagerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApartmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.AppointmentId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.AppointmentId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.AppointmentId">Delete</a>
-            </td>
+        @foreach (var item in Model.Appointment) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManagerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApartmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.AppointmentId">Details</a> |
+                    @if (User.IsInRole("Tenant"))
+                    {
+                        <form method="post" asp-page="./Index">
+                            <input type="hidden" name="id" value="@item.AppointmentId" />
+                            <button type="submit" name="action" value="Cancel" class="btn btn-danger">Cancel</button>
+                        </form>
+                    }
+                </td>
         </tr>
 }
     </tbody>
