@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinalProject.Pages.Apartments_search
 {
@@ -20,13 +19,15 @@ namespace FinalProject.Pages.Apartments_search
             _context = context;
         }
 
-        public IList<Apartment> Apartment { get;set; } = default!;
+        public IList<Apartment> Apartments { get; set; } = default!;
+        public IList<Building> Buildings { get; set; } = new List<Building>();
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? buildingId)
         {
-            var query = _context.Apartment.AsQueryable();
-
-            Apartment = await query.Where(a => a.Status != ApartmentStatus.Occupied).ToListAsync();
+            Buildings = await _context.Building.ToListAsync();
+            Apartments = await _context.Apartment
+                .Where(a => a.Status != ApartmentStatus.Occupied)
+                .ToListAsync();
         }
     }
 }

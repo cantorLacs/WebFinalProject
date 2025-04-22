@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Appointments
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
@@ -26,12 +28,14 @@ namespace FinalProject.Pages.Appointments
         {
             var query = _context.Appointment.AsQueryable();
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userRoleClaim = User.FindFirst(ClaimTypes.Role);
 
             if (userIdClaim != null)
             {
                 var userId = int.Parse(userIdClaim.Value);
+                var userRole = (userRoleClaim.Value);
 
-                Appointment = await query.Where(m => m.TenantId == userId || m.ManagerId == userId).ToListAsync();
+                Appointment = await query.Where(m => m.TenantId == userId || userRole == "Manager").ToListAsync();
                
             }
             else

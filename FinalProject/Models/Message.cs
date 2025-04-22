@@ -21,6 +21,8 @@ namespace FinalProject.Models
         [Display(Name = "Content")]
         public string? Content { get; set; }
 
+        public int? ApartmentId { get; set; }
+
         public DateTime SendDate { get; set; }
 
         public bool IsRead { get; set; }

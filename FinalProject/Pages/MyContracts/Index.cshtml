@@ -1,25 +1,21 @@
 ﻿@page
-@model FinalProject.Pages.Apartments.IndexModel
-
+@model FinalProject.Pages.MyContracts.IndexModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Apartments</h1>
+<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].ImagePath)
+                @Html.DisplayNameFor(model => model.Apartment[0].Buildingid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Buildingid)
+                @Html.DisplayNameFor(model => model.Apartment[0].ManagerId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Apartment[0].ApartmentNumber)
@@ -28,22 +24,16 @@
                 @Html.DisplayNameFor(model => model.Apartment[0].Floor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Bedrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Area)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Apartment[0].RentalPrice)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Apartment[0].Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].TenantId)
+                @Html.DisplayNameFor(model => model.Apartment[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Description)
+                @Html.DisplayNameFor(model => model.Apartment[0].ImagePath)
             </th>
             <th></th>
         </tr>
@@ -52,10 +42,10 @@
 @foreach (var item in Model.Apartment) {
         <tr>
             <td>
-                <img src="@item.ImagePath" alt="Apartment Image" style="width:100px;height:auto;" />
+                @Html.DisplayFor(modelItem => item.Buildingid)
             </td>
             <td>
-                @Model.Buildings.FirstOrDefault(b => b.BuildingId == item.Buildingid)?.Name
+                @Html.DisplayFor(modelItem => item.ManagerId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ApartmentNumber)
@@ -64,27 +54,20 @@
                 @Html.DisplayFor(modelItem => item.Floor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bedrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.RentalPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenantId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ApartmentId">Edit</a> |
+                <img src="@item.ImagePath" alt="Apartment Image" style="width:100px;height:auto;" />
+            </td>
+            <td>
                 <a asp-page="./Details" asp-route-id="@item.ApartmentId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ApartmentId">Delete</a>
+                <a asp-page="/Messages/Create" asp-route-apartmentId="@item.ApartmentId">Message Manager</a>
             </td>
         </tr>
 }

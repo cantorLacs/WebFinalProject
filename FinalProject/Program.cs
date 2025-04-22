@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using FinalProject.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/index";
     });
 
-builder.Services.AddAuthorization();
 
+builder.Services.AddAuthorization();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 10485760; // 10 MB
+});
 
 var app = builder.Build();
 

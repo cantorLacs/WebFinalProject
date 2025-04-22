@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
 
-namespace FinalProject.Pages.EventReports
+namespace FinalProject.Pages.MyContracts
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace FinalProject.Pages.EventReports
             _context = context;
         }
 
-        public EventReport EventReport { get; set; } = default!;
+        public Apartment Apartment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace FinalProject.Pages.EventReports
                 return NotFound();
             }
 
-            var eventreport = await _context.EventReport.FirstOrDefaultAsync(m => m.ReportId == id);
-            if (eventreport == null)
+            var apartment = await _context.Apartment.FirstOrDefaultAsync(m => m.ApartmentId == id);
+            if (apartment == null)
             {
                 return NotFound();
             }
             else
             {
-                EventReport = eventreport;
+                Apartment = apartment;
             }
             return Page();
         }

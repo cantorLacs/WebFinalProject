@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace FinalProject.Pages.Apartments
 {
+
     public class CreateModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
@@ -26,6 +27,9 @@ namespace FinalProject.Pages.Apartments
 
         [BindProperty]
         public int SelectedBuildingId { get; set; }
+
+        [BindProperty]
+        public IFormFile ImageFile { get; set; }
         public IActionResult OnGet()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -61,6 +65,38 @@ namespace FinalProject.Pages.Apartments
             }
 
             Apartment.Buildingid = SelectedBuildingId;
+
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var filePath = Path.Combine(uploads, ImageFile.FileName);
+
+                try
+                {
+                    if (!Directory.Exists(uploads))
+                    {
+                        Directory.CreateDirectory(uploads);
+                    }
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    Apartment.ImagePath = $"/images/{ImageFile.FileName}";
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Error uploading image: " + ex.Message);
+                    return Page();
+                }
+            }
+            else
+            {
+                Apartment.ImagePath = null; 
+            }
+            
+            Apartment.ManagerId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             _context.Apartment.Add(Apartment);
             await _context.SaveChangesAsync();

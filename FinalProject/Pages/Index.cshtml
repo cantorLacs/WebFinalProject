@@ -4,7 +4,32 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .background {
+        background-image: url('/images/background.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .btn-custom {
+        margin: 10px;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        background-color: rgba(0, 123, 255, 0.8);
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+
+<div class="background">
+    
+    <a asp-page="/Buildings-search/Index" class="btn-custom">View Buildings</a>
+    <a asp-page="/Apartments-search/Index" class="btn-custom">View Apartments</a>
 </div>

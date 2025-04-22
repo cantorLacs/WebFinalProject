@@ -54,8 +54,14 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Apartment.Status" class="control-label"></label>
-                <select asp-for="Apartment.Status" class="form-control"></select>
+                <select asp-for="Apartment.Status" class="form-control" asp-items="Model.StatusOptions"></select>
                 <span asp-validation-for="Apartment.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Apartment.TenantId" class="control-label"></label>
+                <select asp-for="Apartment.TenantId" class="form-control" asp-items="Model.Tenants"></select>
+                <span asp-validation-for="Apartment.TenantId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Apartment.Description" class="control-label"></label>

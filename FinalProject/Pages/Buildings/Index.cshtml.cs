@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Buildings
 {
+    [Authorize(Roles = nameof(UserRole.Manager))]
     public class IndexModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;

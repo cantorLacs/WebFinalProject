@@ -16,6 +16,10 @@ namespace FinalProject.Models
         [Key]
         public int ApartmentId { get; set; }
 
+        public int ManagerId { get; set; }
+
+        public int? TenantId { get; set; }
+
         [Required(ErrorMessage = "Building ID is required.")]
         public int Buildingid { get; set; } 
 
@@ -44,5 +48,7 @@ namespace FinalProject.Models
 
         [Display(Name = "Description")]
         public string? Description { get; set; }
+
+        public string? ImagePath { get; set; }
     }
 }

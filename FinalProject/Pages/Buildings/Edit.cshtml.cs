@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Buildings
 {
+    [Authorize(Roles = nameof(UserRole.Manager))]
     public class EditModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;

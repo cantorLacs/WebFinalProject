@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Apartments
 {
+    [Authorize]
+
     public class DetailsModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;

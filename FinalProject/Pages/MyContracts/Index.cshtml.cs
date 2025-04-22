@@ -7,15 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
-using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
-namespace FinalProject.Pages.Apartments
+namespace FinalProject.Pages.MyContracts
 {
-    [Authorize(Roles = nameof(UserRole.Manager))]
     public class IndexModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
-
 
         public IndexModel(FinalProject.Data.FinalProjectContext context)
         {
@@ -23,12 +21,24 @@ namespace FinalProject.Pages.Apartments
         }
 
         public IList<Apartment> Apartment { get;set; } = default!;
-        public IList<Building> Buildings { get; set; } = new List<Building>();
 
         public async Task OnGetAsync()
         {
-            Buildings = await _context.Building.ToListAsync();
-            Apartment = await _context.Apartment.ToListAsync();
+
+            var query = _context.Apartment.AsQueryable();
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                var userId = int.Parse(userIdClaim.Value);
+
+                Apartment = await query.Where(a => a.TenantId == userId).ToListAsync();
+
+            }
+            else
+            {
+                Apartment = new List<Apartment>();
+            }
 
         }
     }

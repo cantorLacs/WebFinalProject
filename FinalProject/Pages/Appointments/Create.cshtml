@@ -14,34 +14,60 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (User.IsInRole("Manager"))
+            {
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="SelectedTenant" class="control-label">Tenant</label>
+                    <select asp-for="SelectedTenant" class="form-control" asp-items="Model.Tenants"></select>
+                    <span asp-validation-for="SelectedTenant" class="text-danger"></span>
+                </div>
+            }
+
+            <input type="hidden" asp-for="CurrentApartmentId" />
+
+            @if (User.IsInRole("Manager"))
+            {
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="SelectedApartment" class="control-label">Apartment: </label>
+                    <select asp-for="SelectedApartment" class="form-control" asp-items="Model.Apartments"></select>
+                    <span asp-validation-for="SelectedApartment" class="text-danger"></span>
+                </div>
+            }
+
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Appointment.TenantId" class="control-label"></label>
-                <input asp-for="Appointment.TenantId" class="form-control" />
-                <span asp-validation-for="Appointment.TenantId" class="text-danger"></span>
+                <label class="control-label">Date</label>
+                <input type="date" id="appointmentDate" class="form-control" />
             </div>
-            <div class="form-group">
+
+            <div class="form-group mt-2">
                 <span class="text-danger">*</span>
-                <label asp-for="Appointment.ManagerId" class="control-label"></label>
-                <input asp-for="Appointment.ManagerId" class="form-control" />
-                <span asp-validation-for="Appointment.ManagerId" class="text-danger"></span>
+                <label class="control-label">Time</label>
+                <select id="appointmentTime" class="form-control">
+                    <option value="">-- Select hour --</option>
+                    @for (int hour = 10; hour <= 16; hour++)
+                    {
+                        var time = new TimeSpan(hour, 0, 0);
+                        var label = DateTime.Today.Add(time).ToString("h tt");
+                        <option value="@time.ToString(@"hh\:mm")">@label</option>
+                    }
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Appointment.ApartmentId" class="control-label"></label>
-                <input asp-for="Appointment.ApartmentId" class="form-control" />
-                <span asp-validation-for="Appointment.ApartmentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Appointment.Date" class="control-label"></label>
-                <input asp-for="Appointment.Date" class="form-control" />
-                <span asp-validation-for="Appointment.Date" class="text-danger"></span>
-            </div>
+
+            <input type="hidden" asp-for="Appointment.Date" id="combinedDateTime" />
+            <span asp-validation-for="Appointment.Date" class="text-danger"></span>
+
+
+
             <div class="form-group">
                 <label asp-for="Appointment.Notes" class="control-label"></label>
                 <input asp-for="Appointment.Notes" class="form-control" />
                 <span asp-validation-for="Appointment.Notes" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -54,5 +80,36 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateInput = document.getElementById("appointmentDate");
+            const timeSelect = document.getElementById("appointmentTime");
+            const combinedInput = document.getElementById("combinedDateTime");
+
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setDate(today.getDate() + 6);
+
+            const formatDate = (d) => d.toISOString().split("T")[0];
+            dateInput.setAttribute("min", formatDate(today));
+            dateInput.setAttribute("max", formatDate(maxDate));
+
+            function combine() {
+                if (dateInput.value && timeSelect.value) {
+                    const combined = new Date(dateInput.value + "T" + timeSelect.value);
+                    combined.setSeconds(0);
+                    combined.setMilliseconds(0);
+                    combinedInput.value = combined.toISOString();
+                }
+            }
+
+            dateInput.addEventListener("change", combine);
+            timeSelect.addEventListener("change", combine);
+        });
+    </script>
 }
+
+

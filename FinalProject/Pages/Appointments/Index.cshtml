@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Appointments</h1>
 
 @if (User.IsInRole("Manager"))
 {
@@ -17,12 +17,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointment[0].ManagerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointment[0].ApartmentId)
-            </th>
+
+            @if (User.IsInRole("Manager"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Appointment[0].ApartmentId)
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Appointment[0].Date)
             </th>
@@ -38,12 +39,12 @@
     <tbody>
         @foreach (var item in Model.Appointment) {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ManagerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApartmentId)
-                </td>
+                @if (User.IsInRole("Manager"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApartmentId)
+                  </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>

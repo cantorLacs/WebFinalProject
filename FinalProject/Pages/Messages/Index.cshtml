@@ -3,9 +3,12 @@
 
 <h1>Messages</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (!User.IsInRole("Tenant"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
 
 <h2>Received Messages</h2>
 <table class="table">
@@ -52,12 +55,7 @@
                 <td>@message.ReceiverId</td>
                 <td>@message.Subject</td>
                 <td>@message.SendDate.ToString("g")</td>
-                <td>
-                    @(message.IsRead ? "Read" : "New")
-                </td>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@message.MessageId">Open</a> |
-                </td>
+                <td>@message.Content</td>
             </tr>
         }
     </tbody>

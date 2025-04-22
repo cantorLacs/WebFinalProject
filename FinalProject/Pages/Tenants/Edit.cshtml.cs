@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Tenants
 {
+    [Authorize(Roles = nameof(UserRole.Owner))]
     public class EditModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
@@ -52,6 +54,7 @@ namespace FinalProject.Pages.Tenants
 
             try
             {
+                User.Role = UserRole.Tenant;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -68,7 +71,7 @@ namespace FinalProject.Pages.Tenants
 
             return RedirectToPage("./Index");
         }
-
+        
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.UserId == id);

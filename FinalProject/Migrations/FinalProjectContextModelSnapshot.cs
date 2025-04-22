@@ -41,7 +41,7 @@ namespace FinalProject.Migrations
                     b.Property<int>("Bedrooms")
                         .HasColumnType("int");
 
-                    b.Property<int>("BuildingId")
+                    b.Property<int>("Buildingid")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -50,15 +50,22 @@ namespace FinalProject.Migrations
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ManagerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RentalPrice")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("ApartmentId");
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("BuildingId");
+                    b.HasKey("ApartmentId");
 
                     b.ToTable("Apartment");
                 });
@@ -126,35 +133,6 @@ namespace FinalProject.Migrations
                     b.ToTable("Building");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.EventReport", b =>
-                {
-                    b.Property<int>("ReportId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportId"));
-
-                    b.Property<string>("EventDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EventType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReportDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ReportId");
-
-                    b.ToTable("EventReport");
-                });
-
             modelBuilder.Entity("FinalProject.Models.Message", b =>
                 {
                     b.Property<int>("MessageId")
@@ -162,6 +140,9 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
+
+                    b.Property<int?>("ApartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -230,17 +211,6 @@ namespace FinalProject.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Apartment", b =>
-                {
-                    b.HasOne("FinalProject.Models.Building", "Building")
-                        .WithMany()
-                        .HasForeignKey("BuildingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Building");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tenants</h1>
 
 <form method="get">
     <div class="form-group">
@@ -22,7 +22,6 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.User[0].FirstName)</th>
             <th>@Html.DisplayNameFor(model => model.User[0].LastName)</th>
-            <th>@Html.DisplayNameFor(model => model.User[0].Password)</th>
             <th>@Html.DisplayNameFor(model => model.User[0].Email)</th>
             <th>@Html.DisplayNameFor(model => model.User[0].Role)</th>
             <th>@Html.DisplayNameFor(model => model.User[0].Phone)</th>
@@ -36,7 +35,6 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Password)</td>
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.Role)</td>
                 <td>@Html.DisplayFor(modelItem => item.Phone)</td>

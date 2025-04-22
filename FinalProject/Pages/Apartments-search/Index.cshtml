@@ -2,52 +2,54 @@
 @model FinalProject.Pages.Apartments_search.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Available Apartments";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Apartments Available</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Buildingid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Floor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].ApartmentNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apartment[0].Description)
-            </th>
+            <th>Image</th>
+            <th>Building</th>
+            <th>Apartment Number</th>
+            <th>Floor</th>
+            <th>Rental Price</th>
+            <th>Description</th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Apartment) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.Buildingid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApartmentNumber)
-            </td>
+        @foreach (var item in Model.Apartments)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImagePath" alt="Apartment Image" style="width:100px;height:auto;" />
+                </td>
+                <td>
+                    @Model.Buildings.FirstOrDefault(b => b.BuildingId == item.Buildingid)?.Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApartmentNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floor)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RentalPrice)
                 </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                |<a asp-page="./Details" asp-route-id="@item.ApartmentId">Details</a>|
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.ApartmentId">Details</a> |
+                    <a asp-page="/Appointments/Create" asp-route-apartmentId="@item.ApartmentId">Get Appointment</a> |
+                    <a asp-page="/Messages/Create" asp-route-apartmentId="@item.ApartmentId">Messege the Manager</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

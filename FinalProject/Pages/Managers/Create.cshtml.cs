@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Users
 {
+    [Authorize(Roles = nameof(UserRole.Owner))]
     public class CreateModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;
@@ -34,6 +36,8 @@ namespace FinalProject.Pages.Users
             {
                 return Page();
             }
+            User.Role = UserRole.Manager;
+            User.RegistrationDate = DateTime.Now;
 
             _context.User.Add(User);
             await _context.SaveChangesAsync();

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Pages.Users
 {
+    [Authorize(Roles = nameof(UserRole.Owner))]
     public class DetailsModel : PageModel
     {
         private readonly FinalProject.Data.FinalProjectContext _context;

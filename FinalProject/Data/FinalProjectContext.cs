@@ -18,7 +18,6 @@ namespace FinalProject.Data
         public DbSet<FinalProject.Models.User> User { get; set; } = default!;
         public DbSet<FinalProject.Models.Appointment> Appointment { get; set; } = default!;
         public DbSet<FinalProject.Models.Building> Building { get; set; } = default!;
-        public DbSet<FinalProject.Models.EventReport> EventReport { get; set; } = default!;
         public DbSet<FinalProject.Models.Message> Message { get; set; } = default!;
     }
 }
