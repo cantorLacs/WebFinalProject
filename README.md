@@ -133,17 +133,6 @@ A web-based property management system developed using ASP.NET Core that facilit
 
 ---
 
-## 📚 Conclusion
-Through this project, I gained experience in:
-- Full-stack ASP.NET Core development
-- Secure authentication & authorization
-- Database management with EF Core
-- Responsive UI with Razor Pages + Bootstrap
-- Real-world property management logic
-- Git version control & documentation best practices
-
----
-
 ## 📖 Bibliography
 1. [ASP.NET Core Documentation](https://docs.microsoft.com/en-us/aspnet/core)
 2. [Entity Framework Core Docs](https://docs.microsoft.com/en-us/ef/core/)
