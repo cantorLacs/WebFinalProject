@@ -1,15 +1,11 @@
 # Property Rental Management System (PRMS)
 
 ## Course Information
-- **Course Number**: 420-DW4-AS  
 - **Course Title**: Web Server Applications Development II  
-- **Session**: Winter 2025  
-- **Group**: 6950  
 - **Due Date**: 24/04/2025  
 
 ## Author
 - **Student**: Luis Antonio Cantor  
-- **Student ID**: 2234228  
 - **Teacher**: Quang Hoang Cao  
 
 ---
